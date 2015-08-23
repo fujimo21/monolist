@@ -15,14 +15,36 @@
           </p>
         </div>
         <div class="action clearfix">
-          <%= link_to "" , ownerships_path(asin: item.get('ASIN') , type: "Want") ,
+          <div id="want_form">
+            <% if current_user.want?(item) %>
+              <%= link_to "" , 
+                  ownership_path(current_user.wants.find_by(:item_id => item.id) , 
+                  item_id: item.id , type: "Want") ,
+                      :class => "want-#{item.id} btn-want btn btn-danger btn-sm wanted",
+                      :remote => true,
+                      :method => :delete %>
+            <% else %>
+              <%= link_to "" , ownerships_path(asin: item.get('ASIN') , type: "Want") ,
                       :class => "want-#{item.get('ASIN')} btn-want btn btn-danger btn-sm want",
                       :remote => true,
                       :method => :post %>
-          <%= link_to "" , ownerships_path(asin: item.get('ASIN') , type: "Have") ,
+            <% end %>
+          </div>
+          <div id="have_form">
+            <% if current_user.have?(item) %>
+              <%= link_to "" , 
+                  ownership_path(current_user.haves.find_by(:item_id => item.id) , 
+                  item_id: item.id , type: "Have") ,
+                      :class => "have-#{item.id} btn-want btn btn-warning btn-sm haved",
+                      :remote => true,
+                      :method => :delete %>
+            <% else %>
+              <%= link_to "" , ownerships_path(asin: item.get('ASIN') , type: "Have") ,
                       :class => "have-#{item.get('ASIN')} btn-have btn btn-warning btn-sm have",
                       :remote => true,
                       :method => :post %>
+            <% end %>
+          </div>
         </div>
       </div>
     <% end %>
