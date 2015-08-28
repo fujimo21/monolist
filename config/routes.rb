@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
+  get '/ranking/have', to: 'ranking#have'
+  get '/ranking/want', to: 'ranking#want'
+  
 
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
@@ -47,11 +50,9 @@ Rails.application.routes.draw do
   #   end
 
   # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
+   #  resources :ranking do
+   #    resources :have
+  #     resources :want
   #   end
 
   # Example resource route with concerns:
@@ -62,9 +63,9 @@ Rails.application.routes.draw do
   #   resources :photos, concerns: :toggleable
 
   # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+  # namespace :admin do
+     # Directs /admin/products/* to Admin::ProductsController
+     # (app/controllers/admin/products_controller.rb)
+    # resources :products
+  # end
 end
