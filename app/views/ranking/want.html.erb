@@ -1,8 +1,8 @@
 <div class="cover">
   <div class="cover-inner">
     <div class="cover-contents">
-      <h1>素敵なモノと出会う場所</h1>
-      <%= link_to 'モノリストを始める' , login_path, class: "btn btn-success btn-lg" %>
+      <h1>Want ランキング</h1>
+      <%= link_to 'モノを探しに行く' , login_path, class: "btn btn-success btn-lg" %>
     </div>
   </div>
 </div>
@@ -11,6 +11,10 @@
   <div class="container-inner inner-default clearfix">
     <% @wants.each do |want| %>
       <div class="item-box">
+      	<h3 class="ranking-number">
+      			<%= @count +=1 %>位
+      			<%= want.want_users.count %> Wants
+      	</h3>
         <div class="image">
           <div class="img-wrap">
             <% if want.large_image.present? %>

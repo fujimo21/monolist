@@ -15,7 +15,11 @@ class UsersController < ApplicationController
   end
   
   def show
-    @items = @user.items
+    if @user.want_items.present?
+      @items = @user.want_items
+    else
+      @items = @user.have_items
+    end
   end
 
   private
